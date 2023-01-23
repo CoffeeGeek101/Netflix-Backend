@@ -20,6 +20,6 @@ app.use("/backend/users", userRoute);
 app.use("/backend/movies", movieRoute);
 app.use("/backend/lists", listRoute);
 
-app.listen(8800, ()=>{
+app.listen(8000, ()=>{
     console.log("backend is running")
 }); 
