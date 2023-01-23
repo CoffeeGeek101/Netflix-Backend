@@ -70,14 +70,13 @@ router.delete("/:id", verify, async(req,res)=>{
 
 //USER STATS
 router.get("/stats", verify , async(req,res)=>{
-    if(req.user.isAdmin){
         const today = new Date();
         const lastYear = today.setFullYear(today.setFullYear()-1);
         try{
             const data = await User.aggregate([
                 {
                     $project: {
-                        month: { $month: $createdAt},
+                        month: { $month: "$createdAt"},
                     },
                 },
                 {
@@ -91,9 +90,6 @@ router.get("/stats", verify , async(req,res)=>{
         }catch(err){
             res.status(401).json(err);
         }
-    }else{
-        res.status(403).json("You are not allowed");
-    }
 });
 
 module.exports = router;
