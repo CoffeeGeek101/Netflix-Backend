@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.app-interface{
+    display: flex;
+    padding: 40px 45px;
+    gap: 50px;
+}

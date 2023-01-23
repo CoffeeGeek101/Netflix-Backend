@@ -1,0 +1,10 @@
+.graph{
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.graph-container{
+    box-shadow: 1px 2px 15px rgb(144, 144, 144);
+    padding: 20px;
+    border-radius: 10px;
+}
