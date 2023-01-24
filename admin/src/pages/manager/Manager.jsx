@@ -2,7 +2,23 @@ import style from "./manager.css"
 import { DataGrid } from '@mui/x-data-grid';
 import {DeleteSweep} from '@mui/icons-material';
 import { userRows } from "../../dummyData";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { getFiles } from "../../context/filesContext/apiCall";
+import { FileContext } from "../../context/filesContext/FileContext";
+
+  
 export default function Manager() {
+
+  const{movies, dispatch} = useContext(FileContext);
+
+  useEffect(()=>{
+    getFiles(dispatch);
+  },[dispatch]);
+    
+  console.log(movies);
+
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Name', width: 180 },
@@ -34,7 +50,7 @@ export default function Manager() {
     <div className="manager">
       <h1 className="manager-title">Movies / TV-Shows</h1>
         <DataGrid
-        rows={userRows}
+        rows={movies}
         disableSelectionOnClick
         columns={columns}
         pageSize={5}

@@ -1,23 +1,27 @@
 import style from "./app.css";
-import Navbar from "./components/navbar/Navbar";
-import Topbar from "./components/topbar/Topbar";
-import Home from "./pages/home/Home";
-import Manager from "./pages/manager/Manager";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from "./pages/login/Login";
+import LayoutLog from "./layout/LayoutLog";
+import LayoutNav from "./layout/LayoutNav";
+import LayoutFiles from "./layout/LayoutFiles";
+import { AuthContext } from "./context/authContext/AuthContext";
+import { useContext } from "react";
 
 export default function App() {
+  const {user} = useContext(AuthContext);
   return (
     <Router>
-    <div>
-        <Topbar/>
-        <div className="app-interface">
-        <Navbar/>
         <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/files" element={<Manager/>}/>
+            <Route element={user ? <Navigate to="/"/> : <LayoutLog/>}>
+                <Route path="/login" element={<Login/>}/>
+            </Route>
+            <Route element={<LayoutNav/>}>
+            <Route exact path="/"/>
+            </Route>
+            <Route element={<LayoutFiles/>}>
+            <Route path="/files"/>
+            </Route>
         </Routes>
-        </div>
-    </div>
     </Router>
   );
 }
